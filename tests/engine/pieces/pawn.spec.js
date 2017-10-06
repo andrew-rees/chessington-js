@@ -6,10 +6,10 @@ import Square from '../../../src/engine/square';
 
 describe('Pawn', () => {
 
-    let board;
-    beforeEach(() => board = new Board());
-
     describe('white pawns', () => {
+
+        let board;
+        beforeEach(() => board = new Board());    
         
         it('can move one square up', () => {
             const pawn = new Pawn(Player.WHITE); //make new white pawn in class PAwn
@@ -23,14 +23,29 @@ describe('Pawn', () => {
     });
 
     describe('black pawns', () => {
+
+        let board;
+        beforeEach(() => board = new Board(Player.BLACK));    
         
-        it('can move one square down', () => {
+        it('can only move one square down if they have already moved', () => {
             const pawn = new Pawn(Player.BLACK);
-            board.setPiece(Square.at(7, 7), pawn);
+            board.setPiece(Square.at(6, 0), pawn);
+            pawn.moveTo(board, Square.at(5, 0));
+
+            const moves = pawn.getAvailableMoves(board);
+            
+            moves.should.have.length(1);
+            moves.should.deep.include(Square.at(4, 0));
+        });
+
+        it('can move one or two squares down on their first move', () => {
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(6, 7), pawn);
 
             const moves = pawn.getAvailableMoves(board);
 
-            moves.should.deep.include(Square.at(6, 7));
+            moves.should.have.length(2);
+            moves.should.deep.include.members([Square.at(4, 7), Square.at(5, 7)]);
         });
 
     });
