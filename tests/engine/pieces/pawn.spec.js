@@ -11,13 +11,25 @@ describe('Pawn', () => {
         let board;
         beforeEach(() => board = new Board());    
         
-        it('can move one square up', () => {
-            const pawn = new Pawn(Player.WHITE); //make new white pawn in class PAwn
-            board.setPiece(Square.at(0, 0), pawn); //put it on board at 0,0
+        it('can only move one square up if they have already moved', () => {
+            const pawn = new Pawn(Player.WHITE); //make new white pawn in class Pawn
+            board.setPiece(Square.at(1, 0), pawn); //put it on board at 1,0
+            pawn.moveTo(board, Square.at(2, 0));
+
+            const moves = pawn.getAvailableMoves(board);
+            
+            moves.should.have.length(1);
+            moves.should.deep.include(Square.at(3, 0));
+        });
+
+        it('can move one or two squares up on their first move', () => {
+            const pawn = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(1, 7), pawn);
 
             const moves = pawn.getAvailableMoves(board); // get available moves
 
-            moves.should.deep.include(Square.at(1, 0)); // should include a square at 1,0
+            moves.should.have.length(2);
+            moves.should.deep.include.members([Square.at(2, 7), Square.at(3, 7)]); // should include a square at 2, 7
         });
 
     });
