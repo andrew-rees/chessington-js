@@ -12,12 +12,12 @@ describe('Pawn', () => {
     describe('white pawns', () => {
         
         it('can move one square up', () => {
-            const pawn = new Pawn(Player.WHITE);
-            board.setPiece(Square.at(0, 0), pawn);
+            const pawn = new Pawn(Player.WHITE); //make new white pawn in class PAwn
+            board.setPiece(Square.at(0, 0), pawn); //put it on board at 0,0
 
-            const moves = pawn.getAvailableMoves(board);
+            const moves = pawn.getAvailableMoves(board); // get available moves
 
-            moves.should.deep.include(Square.at(1, 0));
+            moves.should.deep.include(Square.at(1, 0)); // should include a square at 1,0
         });
 
     });
