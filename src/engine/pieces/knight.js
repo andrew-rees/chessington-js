@@ -10,6 +10,7 @@ export default class Knight extends Piece {
         let myPosition = board.findPiece(this); //myPosition equals the place on this board where this findPiece places me right now
         let possibleSquares = new Array();
         
+        
         //R+1, C+2//
         possibleSquares.push(new Square (myPosition.row+1, myPosition.col+2));
 
@@ -33,15 +34,6 @@ export default class Knight extends Piece {
 
         //R-2, C-1//
         possibleSquares.push(new Square (myPosition.row-2, myPosition.col-1));
-
-
-
-
-
-
-
-
-
 
 
 

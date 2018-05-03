@@ -26,7 +26,6 @@ export default class King extends Piece {
         //r-1, c=x
         possibleSquares.push(new Square (myPosition.row-1, myPosition.col));
 
-
         return possibleSquares;
     }
 }
