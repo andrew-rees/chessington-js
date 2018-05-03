@@ -1,9 +1,10 @@
 import Piece from './piece';
 import Square from '../square';
+import Board from '../board';
 
 export default class Rook extends Piece {
     constructor(player) {
-        super(player);
+        super(player); 
     }
 
     getAvailableMoves(board) {
