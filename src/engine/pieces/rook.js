@@ -1,10 +1,11 @@
 import Piece from './piece';
 import Square from '../square';
+import Player from '../player';
 import Board from '../board';
 
 export default class Rook extends Piece {
     constructor(player) {
-        super(player); 
+        super(player);
     }
 
     getAvailableMoves(board) {
@@ -13,27 +14,61 @@ export default class Rook extends Piece {
 
         let possibleSquares = new Array();
 
-        for (let i = 0; i <= 7; i++) {// we want to define a new Square 8 times for a column
-            if (i !== myPosition.col) {//as long as we don't count our current column
-                possibleSquares.push(new Square(myPosition.row, i))//add a new object to the array on same row but with +1 in column
-            }
-            
-        }
-        for (let i = 0; i <= 7; i++) {// we want to define a new Square 8 times for a row
-            if (i !== myPosition.row) {//as long as we don't count our current row
-                possibleSquares.push(new Square(i, myPosition.col))//add a new object to the array on same column but with +1 in row
-            }
+        ///////////////////////
+        //FOR MOVING NORTH//
+        //////////////////////
 
-            
+        for (let i = 1; i <= 7; i++) { // we want to define a new Square 8 times for a column
+            let rookSquare = new Square(myPosition.row, myPosition.col+i)
+            if (rookSquare.isOnBoard() && board.isOccupied(rookSquare) === false) { //as long as we don't count our current column
+                possibleSquares.push(rookSquare) //add a new object to the array on same row but with +1 in column
+            } else {
+                break
+            }
         }
-       return possibleSquares // the array of possible squares 
+
+        ////////////////////
+        //FOR MOVING SOUTH//
+        ////////////////////
+
+        for (let i = 1; i <= 7; i++) { // we want to define a new Square 8 times for a column
+            let rookSquare = new Square(myPosition.row, myPosition.col-i)
+            if (rookSquare.isOnBoard() && board.isOccupied(rookSquare) === false) { //as long as we don't count our current column
+                possibleSquares.push(rookSquare) //add a new object to the array on same row but with +1 in column
+            } else {
+                break
+            }
+        }       
+
+
+        ////////////////////
+        //FOR MOVING EAST//
+        ///////////////////
+
+        for (let i = 1; i <= 7; i++) { // we want to define a new Square 8 times for a column
+            let rookSquare = new Square(myPosition.row+i, myPosition.col);
+            if (rookSquare.isOnBoard() && board.isOccupied(rookSquare) === false) { //as long as we don't count our current column
+                possibleSquares.push(rookSquare); //add a new object to the array on same row but with +1 in column
+            } else {
+                break
+            }
+        }
+
+
+        ////////////////////
+        //FOR MOVING WEST//
+        ///////////////////
+
+        for (let i = 1; i <= 7; i++) { // we want to define a new Square 8 times for a column
+            let rookSquare = new Square(myPosition.row-i, myPosition.col)
+            if (rookSquare.isOnBoard() && board.isOccupied(rookSquare) === false) { //as long as we don't count our current column
+                possibleSquares.push(rookSquare) //add a new object to the array on same row but with +1 in column
+            } else {
+                break
+            }
+        }
+
+        return possibleSquares // the array of possible squares 
     }
-    
+
 }
-
-//1) define myPosition
-//2) define possibleSquares
-// 4) return new Array/new Square
-
-
-

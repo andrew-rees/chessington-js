@@ -25,6 +25,9 @@ export default class Board {
     }
 
     isOccupied(square) {
+        if(!square.isOnBoard()) {
+            return false;
+        }
         if (this.getPiece(square) === undefined) {
             return false
         } else {
